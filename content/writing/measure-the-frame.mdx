@@ -1,0 +1,68 @@
+---
+title: "Measure the frame before you optimize it"
+description: "What a measurement gate changed about the way I build a Rust voxel engine."
+date: "2026-09-30"
+tags: ["rust", "graphics"]
+---
+
+<Note title="Archived repo">
+  This note is about the earlier engine repository, which is now archived. The
+  work continues at [Valescent Engine](https://github.com/Valescent/engine).
+</Note>
+
+Voxel engines attract premature cleverness. Greedy meshing, level of detail, indirect draws, bindless textures — every technique is interesting, and most of them are the wrong next step.
+
+The engine I built before Valescent used a simple rule: **a milestone does not start until the previous one is measured.** Not "looks smooth on my machine". Measured, recorded, and written down.
+
+## The numbers are part of the architecture
+
+The slice I measured rendered 1 m blocks, 16³ meshlets, and 128³ chunk edges. The render ring held 256 chunks at 1080p, and the world generator produced a finite 1,024 km square with 18 biomes, rivers, lakes, caves, ores, landmarks, structures, and flora.
+
+Those are not arbitrary constants. They are the *minimum profile* the M1 gate had to clear. Changing one is an architectural change, not a tuning knob.
+
+- Smaller meshlets mean more draw calls and more bookkeeping.
+- Larger chunks mean longer mesh builds and worse streaming granularity.
+- A wider ring means more memory and more uploads per frame.
+
+The gate exists because it is very easy to move all three at once and learn nothing.
+
+## What actually gets recorded
+
+A benchmark is only useful if it can be compared later. The repository keeps recorded runs, history, and fixtures next to the code, and the milestone status document links the evidence.
+
+The measurements that mattered:
+
+- **Frame time percentiles**, not just an average. A 60 fps average with 40 ms spikes feels worse than a stable 45.
+- **Mesh build time per chunk**, because it competes with rendering for the same frame budget.
+- **Memory per chunk and per meshlet**, since a streaming ring multiplies every allocation.
+- **Upload stalls**, which are invisible in a clean demo and obvious when the camera moves.
+
+The benchmark harness runs the same scenes so a change can be attributed. If a run cannot be reproduced, it does not count as evidence.
+
+## What the measurements changed
+
+Two decisions came directly out of numbers rather than taste.
+
+First, the meshlet size stayed at 16³. Larger meshlets reduced draw calls but pushed build times past the point where streaming stayed smooth.
+
+Second, streaming became a budgeted queue instead of "generate until it looks done". The engine now spends a fixed amount of work per frame, even if that means terrain arrives a moment later. A stable frame with late terrain is better than a complete world that hitches.
+
+Neither of those is a novel technique. They are the kind of decisions you only make when you have the numbers in front of you.
+
+## Honest limits
+
+This is a solo project, not a shipped game. The measurements come from a small number of machines, GPU tests skip when no adapter is available, and the fixtures are not a representative benchmark suite for the hardware people actually own.
+
+I try to say that in the status document instead of implying the engine is faster than it is. A measurement gate is not a marketing claim. It is a way to avoid lying to yourself between milestones.
+
+<Note title="Reproduce it">
+  The benchmark harness, fixtures, and recorded runs live in the repository next
+  to the code they measure. If you want to check the numbers, start with
+  `benchmarks/` rather than the README.
+</Note>
+
+## The takeaway
+
+Optimization without a baseline is just reordering work. The gate costs a day per milestone and saves weeks of guessing later.
+
+If you take one thing from this: write the number down before you write the optimization. The number is the specification.

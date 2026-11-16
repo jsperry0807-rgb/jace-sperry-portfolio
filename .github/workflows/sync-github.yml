@@ -1,0 +1,51 @@
+name: Refresh GitHub activity
+
+on:
+  schedule:
+    # Daily at 06:17 UTC. GitHub may delay the run by a few minutes.
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: github-activity
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Refresh contribution snapshot
+        run: pnpm sync:github
+        env:
+          # The repository token is normally enough. If GitHub's GraphQL API
+          # rejects it, add a GH_SYNC_TOKEN secret with `read:user` scope.
+          GITHUB_TOKEN: ${{ secrets.GH_SYNC_TOKEN || github.token }}
+
+      - name: Commit the snapshot if it changed
+        run: |
+          if git diff --quiet -- lib/github-contributions.ts; then
+            echo "No changes to the contribution snapshot."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lib/github-contributions.ts
+          git commit -m "chore: refresh GitHub activity"
+          git push

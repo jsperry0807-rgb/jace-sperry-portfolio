@@ -1,0 +1,76 @@
+---
+title: "The server owns the save"
+description: "How Cinderfall kept game state on the API, and how a deterministic simulation made offline progress cheap to replay."
+date: "2026-11-12"
+tags: ["architecture", "typescript"]
+---
+
+<Note title="Archived project">
+  Cinderfall is archived and no longer maintained. This note is kept as a
+  record of the design decisions behind it.
+</Note>
+
+An idle game has an awkward property: the most important thing that happens is that nothing happens. A player closes the tab, comes back two days later, and expects the game to have progressed as if they had been there the whole time.
+
+That expectation forces a decision early. Where does the truth live?
+
+In Cinderfall, the answer was the server. It is not the only defensible answer, but it is the one that made the rest of the system easier to reason about.
+
+## The tempting version
+
+The simplest idle game is a JavaScript loop and a `localStorage` blob. It is also the version I try to avoid now.
+
+A client-owned save is editable from devtools. It is also trivially time-travelable: move the system clock forward a year and the game hands you a year of progress. Worse, the longer a run lives, the more valuable that blob becomes, and the less willing anyone is to risk migrating it.
+
+A server-owned save does not make cheating impossible. It does make it a request you can authenticate, rate-limit, and log.
+
+## One simulation, two hosts
+
+The architecture that made this practical is a pure package: `packages/sim`.
+
+It contains the game rules and nothing else — no DOM, no framework, no I/O. The API uses it to simulate time away. The web client uses it for the live loop. There is exactly one implementation of combat, loot, and progression, and both hosts import it.
+
+```ts
+import { advance } from "@cinderfall/sim";
+
+// The server catches up after a long absence.
+export function catchUp(state, rng, elapsedSeconds) {
+  return advance(state, elapsedSeconds, rng, { autoRebirth: true });
+}
+```
+
+Because the package is deterministic given an RNG, the client's 10 Hz loop and the server's catch-up pass produce the same result. That is the whole trick. The client is not authoritative; it is just the fastest place to run the same simulation.
+
+## Determinism is a contract
+
+`mulberry32(seed)` lives in the save. Every random decision — loot rolls, enemy selection, critical hits — draws from that stream in a fixed order. The seed is part of the state, so a replay starts from the same number.
+
+This has consequences beyond cheating:
+
+- The simulation cannot call `Math.random()`, `Date.now()`, or anything else ambient.
+- Event order matters, so the code has to emit events as data rather than mutate presentation.
+- A refactor that changes RNG consumption is a save-breaking change, even if the output "looks fine".
+
+That last point is the uncomfortable one. Determinism is not a feature you add at the end; it is a constraint on every line inside the package.
+
+## Offline progress is a request you can feel
+
+Simulating two days of idle progress is not free. `GET /api/game/state` can take tens to a few hundred milliseconds when a player returns after a long absence, because the server is actually stepping the simulation forward.
+
+I do not hide that. The response is a normal request, the client keeps a `localStorage` copy only as a fast-start cache, and the server save always wins. If the server save is still pristine on first sync, the local run is migrated once. Signing out wipes the cache so progress does not leak between accounts.
+
+The alternative — trusting the cache and reconciling later — sounds nicer until you have to explain which version of a save is real.
+
+## What I would change
+
+Three things are still on the list:
+
+1. **Version the simulation explicitly.** A `simVersion` on the save would let migrations reject or transform states instead of assuming the code matches.
+2. **Move long catch-ups off the request path.** A job queue with a polling endpoint would keep the API p95 boring, which is usually worth more than a tiny latency win.
+3. **Record seed + duration in tests.** Snapshotting outputs is not enough; I want reproducibility checks that fail loudly when RNG consumption changes.
+
+## The takeaway
+
+"Who owns the save?" is a product question disguised as a storage question. Client ownership buys simplicity and costs trust. Server ownership buys a system you can reason about and costs you a pure simulation package.
+
+For an idle game, that trade is worth it. The simulation is the product. Everything else is delivery.

@@ -1,0 +1,64 @@
+---
+title: "A QR code is a UI decision"
+description: "Designing behavior logging for a hallway: one hand, bad Wi-Fi, and no patience for forms."
+date: "2026-10-24"
+tags: ["product", "design"]
+---
+
+The first version of Offense Tracker was a form. It had every field a school could want: student, class, category, time, description, staff member. It was correct, and it was unusable.
+
+I found that out by watching someone try to use it while walking.
+
+## Start with the environment, not the schema
+
+Behavior logging happens in a hallway between classes. The person doing it is standing, holding a phone in one hand, and has maybe twenty seconds before the next group of students moves through. Wi-Fi is unreliable in parts of the building. The screen is bright and the hallway is not.
+
+That list of constraints is the design brief. It also rules out most of what I had built:
+
+- A multi-step form is a fine desktop pattern and a bad standing pattern.
+- A searchable dropdown of every student is slow when the list is long.
+- A confirmation modal protects data and interrupts the only free hand available.
+- A dashboard with live updates is useless if the save never lands.
+
+## The loop I optimized for
+
+The production app is built around one path: **scan → confirm class → tap a category → save**.
+
+The QR code on a student ID resolves to an opaque token, not a student number. Scanning fills the identity and the current class context. The teacher confirms the class, taps a category, and the record is written. No typing, no dropdown, no date picker.
+
+Everything else in the app is secondary. Reports matter, but they are read at a desk later. The write path is the one that has to survive a hallway.
+
+## Confirmation is not friction
+
+My first instinct was to remove the confirmation step entirely. Scan the code, log immediately, move on. Fewer taps is better, right?
+
+Not when the cost of a wrong record is a conversation with a parent.
+
+The confirmation step is where the app earns trust. It shows the student's name and photo, the class, and the category before anything is written. It is one extra tap that turns a scanner into a system a teacher is willing to use.
+
+The real friction win was not deleting that step. It was making it *cheap*: the right class is preselected, the category buttons are thumb-sized, and the whole screen is one reachable column.
+
+## Offline is a feature you cannot fake
+
+A save that fails silently is worse than a slow form, because the teacher believes the record exists.
+
+The app uses server actions and an explicit pending state. If the request fails, the UI says so and keeps the draft. That is unglamorous, but it is the difference between a tool and a demo.
+
+If I were taking this further, I would add a durable local queue with retry and a visible sync indicator. Optimistic UI without durability is just lying with better animation.
+
+## What I cut
+
+The first release does not have:
+
+- Custom report builders
+- Bulk editing
+- A real-time dashboard
+- Configurable categories per school
+
+Each one is reasonable. None of them are on the twenty-second path. Cutting them made the write flow possible to finish.
+
+## The takeaway
+
+A QR code is not a technical detail. It is a statement that the fastest way to identify a student is to point a camera at them, not to type their name into a search box.
+
+Performance budgets for this kind of tool are measured in taps and seconds, not milliseconds. I still care about frame time, but the interface decision came first.
