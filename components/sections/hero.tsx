@@ -22,7 +22,9 @@ const container = {
 };
 
 const item = {
-  hidden: { opacity: 0, y: 18 },
+  // Text starts visible so the LCP element paints on first load; only the
+  // transform animates. Fading the hero in delays LCP by the hydration time.
+  hidden: { opacity: 1, y: 18 },
   show: {
     opacity: 1,
     y: 0,
@@ -162,7 +164,7 @@ export function Hero({ workingOn }: { workingOn: WorkingOn }) {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 24, scale: 0.985 }}
+            initial={{ opacity: 1, y: 24, scale: 0.985 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.15, ease }}
           >

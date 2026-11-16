@@ -8,7 +8,7 @@ export function ProfilePlate({ workingOn }: { workingOn: WorkingOn }) {
     <div className="relative w-full max-w-md lg:max-w-none">
       <div
         aria-hidden
-        className="absolute -inset-6 -z-10 rounded-[2rem] bg-brand/[0.06] blur-2xl"
+        className="absolute -inset-4 -z-10 rounded-[2rem] bg-brand/[0.06] blur-2xl"
       />
 
       <div className="rounded-[1.35rem] border border-white/10 bg-card/30 p-1.5 shadow-[0_30px_90px_-30px_rgba(0,0,0,0.9)] backdrop-blur">

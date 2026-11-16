@@ -36,7 +36,7 @@ function Stat({
 }) {
   return (
     <div>
-      <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground/70">
+      <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-muted-foreground/85">
         {label}
       </dt>
       <dd
@@ -80,8 +80,8 @@ export function GithubActivity({ stats }: { stats: GithubStats }) {
         </a>
       </div>
 
-      <div className="mt-8 grid gap-4 lg:grid-cols-[0.85fr_1.15fr]">
-        <div className="flex flex-col rounded-xl border border-border/80 bg-card/25 p-5 sm:p-6">
+      <div className="mt-8 grid min-w-0 gap-4 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="flex min-w-0 flex-col rounded-xl border border-border/80 bg-card/25 p-5 sm:p-6">
           <dl className="grid grid-cols-2 gap-x-6 gap-y-5">
             <Stat label="Public repos" value={stats.repos} />
             <Stat label="Languages" value={stats.languageCount} />
@@ -90,7 +90,7 @@ export function GithubActivity({ stats }: { stats: GithubStats }) {
           </dl>
 
           <div className="mt-auto pt-7">
-            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground/70">
+            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground/85">
               Language mix
             </p>
             <div className="mt-3">
@@ -98,14 +98,14 @@ export function GithubActivity({ stats }: { stats: GithubStats }) {
             </div>
           </div>
 
-          <p className="mt-5 border-t border-border/70 pt-4 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground/60">
+          <p className="mt-5 border-t border-border/70 pt-4 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground/85">
             {stats.repos} repos · last push {stats.lastPushLabel}
           </p>
         </div>
 
-        <div className="rounded-xl border border-border/80 bg-card/25 p-5 sm:p-6">
+        <div className="min-w-0 rounded-xl border border-border/80 bg-card/25 p-5 sm:p-6">
           <div className="flex items-baseline justify-between gap-4">
-            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground/70">
+            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground/85">
               Contributions / last 12 months
             </p>
             <span className="font-mono text-xs text-foreground/90">
@@ -113,7 +113,7 @@ export function GithubActivity({ stats }: { stats: GithubStats }) {
             </span>
           </div>
 
-          <div className="mt-5">
+          <div className="mt-5 min-w-0">
             <ContributionGraph
               weeks={contributionSnapshot.weeks}
               total={contributionSnapshot.contributions}
@@ -121,7 +121,7 @@ export function GithubActivity({ stats }: { stats: GithubStats }) {
           </div>
 
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground/60">
+            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground/85">
               {monthFormatter.format(
                 new Date(`${contributionSnapshot.windowStart}T00:00:00Z`),
               )}{" "}
@@ -147,7 +147,7 @@ export function GithubActivity({ stats }: { stats: GithubStats }) {
             />
           </dl>
 
-          <p className="mt-4 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground/60">
+          <p className="mt-4 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground/85">
             Synced {dayLabel(contributionSnapshot.fetchedAt.slice(0, 10))}
           </p>
         </div>

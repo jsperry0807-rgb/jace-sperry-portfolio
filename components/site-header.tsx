@@ -91,6 +91,7 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={isActive ? "location" : undefined}
                 className={cn(
                   "relative isolate rounded-full px-3 py-2 text-[13px] text-muted-foreground transition-colors duration-200 hover:text-foreground",
                   isActive && "text-foreground",

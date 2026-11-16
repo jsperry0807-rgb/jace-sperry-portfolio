@@ -68,7 +68,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
             ))}
-            <span className="ml-auto font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground/70">
+            <span className="ml-auto font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground/85">
               {project.availability ?? "Open source"}
             </span>
           </div>

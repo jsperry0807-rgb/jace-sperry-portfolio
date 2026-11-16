@@ -66,7 +66,7 @@ export function ContributionGraph({
 export function ContributionLegend() {
   return (
     <span className="flex items-center gap-1.5">
-      <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground/60">
+      <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground/85">
         Less
       </span>
       {[0, 1, 2, 3, 4].map((level) => (
@@ -77,7 +77,7 @@ export function ContributionLegend() {
           style={{ backgroundColor: colorFor(level) }}
         />
       ))}
-      <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground/60">
+      <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground/85">
         More
       </span>
     </span>

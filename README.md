@@ -15,6 +15,7 @@ Built with Next.js 16 (App Router), React 19, Tailwind CSS v4, shadcn/ui, Motion
 | UI motion | Motion (`motion/react`) |
 | Scroll timelines | GSAP + ScrollTrigger |
 | Writing | MDX via `next-mdx-remote`, read from `content/writing` |
+| Testing | Playwright + `@axe-core/playwright` |
 | Package manager | pnpm |
 
 ## Development
@@ -33,6 +34,25 @@ pnpm lint       # eslint
 pnpm typecheck  # tsc --noEmit
 ```
 
+## Testing
+
+```bash
+pnpm verify          # lint + typecheck + build + Playwright
+pnpm build && pnpm test
+pnpm test:ui         # interactive Playwright runner
+```
+
+Playwright boots the production build on port `3100` and covers:
+
+- Home content, desktop navigation, active section state, email copy
+- Mobile menu, responsive overflow, reduced-motion hydration
+- MDX index and posts, custom `<Note>` components, custom 404
+- Sitemap, RSS, robots, manifest, favicon, and generated OG image
+- Security headers and CSP
+- WCAG 2.0/2.1 A and AA scans on the home, writing index, post, and 404 pages
+
+The same checks run in `.github/workflows/ci.yml` on every push and pull request.
+
 ## Editing content
 
 All copy lives in four places so the components stay untouched:
@@ -49,7 +69,7 @@ All copy lives in four places so the components stay untouched:
 
 ### Things to update before deploying
 
-1. **Domain** — `lib/site.ts` uses `https://jacesperry.dev` as the canonical URL placeholder. Change it to the real production domain. The email is already set to `jsperry0807@gmail.com`.
+1. **Canonical URL** — set `NEXT_PUBLIC_SITE_URL` in `.env.local` or your host's environment variables (for example `https://jacesperry.dev`). It feeds metadata, the sitemap, RSS, robots, and JSON-LD. On Vercel, the production URL is detected automatically when the variable is unset.
 2. **Social links** — the GitHub profile and organization links point at `jsperry0807-rgb` and `JaSperryTech`.
 3. **Experience dates** — verify the timeline entries in `lib/content.ts`.
 4. **Sample posts** — the three MDX posts are written from real project decisions, but they are samples. Edit or replace them.
@@ -88,6 +108,8 @@ MDX can use the custom `Note` component:
 app/
   layout.tsx              fonts, metadata, JSON-LD, chrome
   page.tsx                home composition
+  error.tsx, global-error.tsx
+  manifest.ts             web app manifest
   writing/page.tsx         writing index
   writing/[slug]/page.tsx  MDX post
   opengraph-image.tsx      generated social card
@@ -99,12 +121,14 @@ components/
   ...                     header, footer, project art, motion helpers
 content/writing/          MDX posts
 lib/                      site config and content
+tests/                    Playwright and axe coverage
 ```
 
 ## Motion notes
 
 - **Motion** handles entrance, scroll reveal, nav active state, and copy feedback.
-- **GSAP** drives three scroll-linked effects: the reading progress bar, the hero plate parallax, and the experience timeline rail/dots.
+- **GSAP** drives the hero plate parallax and the experience timeline rail/dots.
+- The reading progress bar is a CSS scroll-driven animation, with no client JS on writing pages.
 - Every animation is skipped when `prefers-reduced-motion` is set.
 
 ## GitHub data
@@ -128,4 +152,11 @@ If you are not hosting on GitHub, run `pnpm sync:github` from a daily scheduled 
 
 ## Deployment
 
-The site is static-first and deploys cleanly to Vercel. Set the canonical URL in `lib/site.ts` first so metadata, the sitemap, RSS, and JSON-LD all point at the production domain. No environment variables are required.
+The site is static-first and deploys cleanly to Vercel.
+
+1. Import `jsperry0807-rgb/jace-sperry-portfolio` into Vercel.
+2. Set `NEXT_PUBLIC_SITE_URL` to the production URL (`https://your-domain.com`).
+3. Optionally set `GITHUB_TOKEN` in the Vercel environment to raise the GitHub API rate limit during builds. It is not required.
+4. Deploy. The daily sync commit will trigger a fresh deployment when the GitHub integration is connected.
+
+Production builds add security headers, a content security policy, HSTS, and disable the `X-Powered-By` header. The site runs on Node 24 and pnpm 11.

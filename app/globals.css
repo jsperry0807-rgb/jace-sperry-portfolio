@@ -220,3 +220,31 @@
     transform: none;
   }
 }
+
+/* Reading progress, driven by the browser instead of JS where supported. */
+.scroll-progress-bar {
+  transform: scaleX(0);
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress-bar {
+    animation: scroll-progress linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes scroll-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-bar {
+    animation: none;
+    transform: scaleX(0);
+  }
+}

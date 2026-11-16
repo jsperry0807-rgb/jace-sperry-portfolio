@@ -71,6 +71,15 @@ export async function getWorkingOn(): Promise<WorkingOn> {
   cacheLife("hours");
   cacheTag("github-activity");
 
+  const headers: Record<string, string> = {
+    Accept: "application/vnd.github+json",
+    "User-Agent": `${site.name} portfolio`,
+  };
+
+  if (process.env.GITHUB_TOKEN) {
+    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  }
+
   try {
     const owners = [site.githubUser, site.valescentUser];
 

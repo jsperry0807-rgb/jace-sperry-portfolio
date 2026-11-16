@@ -1,3 +1,17 @@
+function resolveSiteUrl() {
+  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (configured) return configured.replace(/\/+$/, "");
+
+  // Vercel exposes the production domain during builds.
+  const vercelProduction = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+  if (vercelProduction) return `https://${vercelProduction.replace(/\/+$/, "")}`;
+
+  const vercelDeployment = process.env.VERCEL_URL?.trim();
+  if (vercelDeployment) return `https://${vercelDeployment.replace(/\/+$/, "")}`;
+
+  return "https://jacesperry.dev";
+}
+
 export const site = {
   name: "Jace Sperry",
   firstName: "Jace",
@@ -10,7 +24,7 @@ export const site = {
   locationShort: "North East, PA",
   timeZone: "America/New_York",
   availability: "Open to internships & freelance",
-  url: "https://jacesperry.dev",
+  url: resolveSiteUrl(),
   github: "https://github.com/jsperry0807-rgb",
   githubOrg: "https://github.com/JaSperryTech",
   githubUser: "jsperry0807-rgb",
