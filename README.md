@@ -116,9 +116,9 @@ The About section includes live repo totals, a language mix, and a contribution 
 
 ### Automatic daily sync
 
-`.github/workflows/sync-github.yml` runs every day at **06:17 UTC** and can also be started manually from the **Actions** tab. It regenerates the snapshot and commits it only when the numbers actually changed.
+`.github/workflows/sync-github.yml` runs every day at **06:17 UTC** and can also be started manually from the **Actions** tab. It regenerates the snapshot and commits it. Because the snapshot records its sync time, this produces one commit per day — that commit is also what triggers a fresh deploy.
 
-- If your host deploys on push (Vercel or GitHub Pages), that commit starts a fresh build, so the heatmap updates without any manual work.
+- If your host deploys on push (Vercel or GitHub Pages), the daily commit starts a fresh build, so the heatmap updates without any manual work.
 - If GitHub is unavailable, the script keeps the committed snapshot and exits successfully, so a scheduled run cannot break the build.
 - Run it locally at any time with `pnpm sync:github`. Add `--strict` to fail on errors instead of keeping the old snapshot: `node scripts/sync-github.mjs --strict`.
 
