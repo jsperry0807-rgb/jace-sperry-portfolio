@@ -44,6 +44,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# docker build secret
+.github-token
+
 # test output
 /test-results/
 /playwright-report/

@@ -1,0 +1,31 @@
+node_modules
+.next
+.git
+.gitignore
+.github
+.idea
+.vscode
+
+# local environment and secrets
+.env*
+.github-token
+*.pem
+
+# tests and reports
+tests
+playwright.config.ts
+test-results
+playwright-report
+blob-report
+playwright/.cache
+*.lighthouse.json
+
+# editor / tooling noise
+AGENTS.md
+opencode.json
+README.md
+
+# build metadata
+Dockerfile
+docker-compose.yml
+.dockerignore

@@ -42,6 +42,7 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  output: process.env.NEXT_STANDALONE === "1" ? "standalone" : undefined,
   turbopack: {
     rules: {
       "*.css": {

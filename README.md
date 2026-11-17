@@ -150,6 +150,45 @@ The workflow uses the repository's own `GITHUB_TOKEN` and sets `contents: write`
 
 If you are not hosting on GitHub, run `pnpm sync:github` from a daily scheduled task and commit the result.
 
+## Docker
+
+The image builds with Next.js standalone output and runs as a non-root user.
+
+```bash
+docker build \
+  --build-arg NEXT_PUBLIC_SITE_URL=https://your-domain.com \
+  -t jace-sperry-portfolio .
+
+docker run --rm -p 3000:3000 \
+  -e NEXT_PUBLIC_SITE_URL=https://your-domain.com \
+  jace-sperry-portfolio
+```
+
+Or with Compose:
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://your-domain.com docker compose up --build
+```
+
+- The container listens on port `3000` and has a health check.
+- `NEXT_PUBLIC_SITE_URL` is inlined at build time, so pass the production URL as a build arg.
+- Rebuild the image to refresh the GitHub contribution snapshot and repo stats.
+- Use `PORT=3001 docker compose up --build` if port 3000 is taken.
+- For a higher GitHub API rate limit during the build, pass a token as a BuildKit secret:
+
+  ```bash
+  printf '%s' "$GITHUB_TOKEN" > .github-token
+  docker build \
+    --secret id=github_token,src=.github-token \
+    --build-arg NEXT_PUBLIC_SITE_URL=https://your-domain.com \
+    -t jace-sperry-portfolio .
+  rm .github-token
+  ```
+
+  `.github-token` is ignored by git and Docker.
+
+CI builds the image, validates the Compose file, and smoke-tests the running container.
+
 ## Deployment
 
 The site is static-first and deploys cleanly to Vercel.

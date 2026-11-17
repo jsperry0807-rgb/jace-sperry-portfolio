@@ -1,0 +1,1 @@
+# Keeps the public directory in the repository so the Docker image can copy it.
