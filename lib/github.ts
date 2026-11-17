@@ -15,6 +15,7 @@ export type WorkingOn = {
 /** Repos that should never be surfaced as "currently working on". */
 const skippedRepos = new Set([
   "portfolio",
+  "jace-sperry-portfolio",
   "my-opencode",
   "duckland",
   "lead-hound",

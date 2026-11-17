@@ -20,6 +20,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${site.url}/ects`,
+      lastModified: updated,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${site.url}/north-east`,
+      lastModified: updated,
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
     ...posts.map((post) => ({
       url: `${site.url}/writing/${post.slug}`,
       lastModified: new Date(post.date),

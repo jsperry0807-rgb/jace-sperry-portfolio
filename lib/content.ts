@@ -1,3 +1,9 @@
+export const aboutParagraphs = [
+  "I'm a student at North East High School, and I spend my afternoons in the software development program at Erie County Technical School. Most of what I know comes from building software for real classrooms and school workflows. That started with small scripts and turned into full applications with authentication, databases, audit trails, and deployments.",
+  "Most of my work is TypeScript across the stack: Next.js and React on the front, Node or Fastify behind it, and a database that has to survive real users. When a problem is performance-bound or needs a lower-level model, I reach for Rust — the engine work is where I learn rendering, memory layout, and measurement the hard way.",
+  "I care about the parts that are easy to skip: role checks enforced on the server, timezones, migrations, error states, and whether the thing still works on a phone in a hallway. I would rather ship a smaller system that holds up than a demo that does not.",
+] as const;
+
 export const principles = [
   {
     title: "Ship the whole thing",
@@ -62,7 +68,7 @@ export const experience: ExperienceItem[] = [
     org: "Giant Eagle",
     location: "North East, PA",
     summary:
-      "Cashier at Giant Eagle — customer service, cash handling, and keeping a lane moving through busy shifts.",
+      "Customer service, cash handling, and keeping a lane moving through busy shifts.",
     bullets: [],
     tech: [],
   },
@@ -122,8 +128,7 @@ export const experience: ExperienceItem[] = [
     role: "Farm Hand",
     org: "Ortan's Fruit Farm",
     location: "North East, PA",
-    summary:
-      "Seasonal harvest work at Ortan's Fruit Farm in North East.",
+    summary: "Seasonal harvest and packing work.",
     bullets: [
       "Folded boxes and kept the packing area supplied through the season.",
       "Collected the boxes pickers filled and logged them in the tracker.",

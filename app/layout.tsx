@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { MotionProvider } from "@/components/motion-provider";
+import { PortfolioTabs } from "@/components/portfolio-tabs";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { site } from "@/lib/site";
@@ -133,7 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-svh bg-background font-sans text-foreground antialiased">
         <div
           aria-hidden
-          className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+          className="pointer-events-none fixed inset-0 z-0 overflow-hidden print:hidden"
         >
           <div className="absolute inset-0 bg-grid opacity-[0.22] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_0%,black,transparent)]" />
           <div className="absolute -top-40 left-1/2 h-[32rem] w-[64rem] -translate-x-1/2 rounded-full bg-brand/[0.07] blur-[120px]" />
@@ -144,13 +145,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <ScrollProgress />
             <a
               href="#main"
-              className="fixed top-4 left-4 z-[100] -translate-y-24 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus-visible:ring-3 focus-visible:ring-ring/50 motion-reduce:transition-none"
+              className="fixed top-4 left-4 z-[100] -translate-y-24 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus-visible:ring-3 focus-visible:ring-ring/50 motion-reduce:transition-none print:hidden"
             >
               Skip to content
             </a>
 
             <div className="relative z-10 flex min-h-svh flex-col">
               <SiteHeader />
+              <PortfolioTabs />
               <main id="main" className="flex-1">
                 {children}
               </main>

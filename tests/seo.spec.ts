@@ -30,6 +30,8 @@ test("feeds and discovery routes", async ({ request }) => {
   const sitemapText = await sitemap.text();
   expect(sitemapText).toContain("/writing/measure-the-frame");
   expect(sitemapText).toContain("/writing/the-server-owns-the-save");
+  expect(sitemapText).toContain("/ects");
+  expect(sitemapText).toContain("/north-east");
 
   const feed = await request.get("/feed.xml");
   expect(feed.status()).toBe(200);

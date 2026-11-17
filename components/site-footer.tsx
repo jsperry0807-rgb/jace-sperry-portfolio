@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, Rss } from "lucide-react";
 
 import { LiveClock } from "@/components/live-clock";
-import { nav, site, socials } from "@/lib/site";
+import { nav, portfolios, site, socials } from "@/lib/site";
 
 const colophon = [
   { label: "Framework", value: "Next.js 16" },
@@ -16,7 +16,7 @@ export function SiteFooter() {
   const year = 2026;
 
   return (
-    <footer className="border-t border-border/70 bg-background/40">
+    <footer className="border-t border-border/70 bg-background/40 print:hidden">
       <div className="page-shell py-14 sm:py-18">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.5fr_0.7fr_0.9fr_1fr]">
           <div>
@@ -51,6 +51,18 @@ export function SiteFooter() {
                   </Link>
                 </li>
               ))}
+              {portfolios
+                .filter((portfolio) => portfolio.href !== "/")
+                .map((portfolio) => (
+                  <li key={portfolio.href}>
+                    <Link
+                      href={portfolio.href}
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {portfolio.label} portfolio
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </nav>
 

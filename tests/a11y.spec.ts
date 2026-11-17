@@ -5,6 +5,8 @@ const pages = [
   { name: "home", path: "/" },
   { name: "writing index", path: "/writing" },
   { name: "post", path: "/writing/the-server-owns-the-save" },
+  { name: "ECTS portfolio", path: "/ects" },
+  { name: "North East portfolio", path: "/north-east" },
   { name: "404", path: "/this-page-does-not-exist" },
 ];
 

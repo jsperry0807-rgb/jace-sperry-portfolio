@@ -53,14 +53,50 @@ Playwright boots the production build on port `3100` and covers:
 
 The same checks run in `.github/workflows/ci.yml` on every push and pull request.
 
+## Portfolios
+
+The site has three portfolios, switchable from the tab bar under the header:
+
+| Route | Purpose |
+| --- | --- |
+| `/` | Personal portfolio — work, about, experience, writing, contact |
+| `/ects` | ECTS graduation portfolio, built against `ECTS_Requirements.md` |
+| `/north-east` | North East High School portfolio and home school reflection |
+
+The two school portfolios have a **Print / Save as PDF** button. The print stylesheet switches the page to a light theme, hides the site chrome, and is sized for letter/A4 output.
+
+### ECTS documents
+
+The ECTS page is intentionally a working portfolio: drafts are written, and personal documents have clear slots. To attach a file:
+
+1. Put the PDF in `public/ects/` (create the folder if needed).
+2. Set the matching `href` in `lib/ects.ts`:
+
+```ts
+// lib/ects.ts
+export const documentSlots = {
+  transcript: { /* ... */ href: "/ects/transcript.pdf" },
+  application: { /* ... */ href: "/ects/application.pdf" },
+  credentials: { /* ... */ href: "/ects/credentials.pdf" },
+} as const;
+
+export const recommendations = [
+  { /* ... */ href: "/ects/recommendation-1.pdf" },
+  { /* ... */ href: "/ects/recommendation-2.pdf" },
+];
+```
+
+The checklist statuses are also in `lib/ects.ts`: `"ready"`, `"draft"`, or `"file"`. Update them as the final PDFs are added. The ATD/field-trip reflections and post-secondary plan include bracketed prompts to personalize.
+
 ## Editing content
 
-All copy lives in four places so the components stay untouched:
+All copy lives in these files so the components stay untouched:
 
 | File | What it controls |
 | --- | --- |
 | `lib/site.ts` | Name, role, email, location, availability, canonical URL, social links, nav |
 | `lib/projects.ts` | Featured project cards and the smaller archive list |
+| `lib/ects.ts` | ECTS graduation portfolio content, checklist, and document slots |
 | `lib/content.ts` | About copy, principles, toolkit groups, experience timeline |
 | `content/writing/*.mdx` | Blog posts (frontmatter + MDX body) |
 | `lib/github.ts` | "Working on" activity, fetched from GitHub and cached for an hour |
@@ -108,6 +144,8 @@ MDX can use the custom `Note` component:
 app/
   layout.tsx              fonts, metadata, JSON-LD, chrome
   page.tsx                home composition
+  ects/page.tsx            ECTS graduation portfolio
+  north-east/page.tsx      North East High School portfolio
   error.tsx, global-error.tsx
   manifest.ts             web app manifest
   writing/page.tsx         writing index
@@ -118,9 +156,9 @@ app/
 components/
   sections/               hero, work, about, experience, writing, contact
   ui/                     shadcn/ui primitives
-  ...                     header, footer, project art, motion helpers
+  ...                     tabs, print button, checklist, document slots
 content/writing/          MDX posts
-lib/                      site config and content
+lib/                      site config, content, ECTS data, GitHub data
 tests/                    Playwright and axe coverage
 ```
 

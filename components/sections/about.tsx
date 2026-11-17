@@ -1,14 +1,10 @@
 import { GithubActivity } from "@/components/github-activity";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { principles, stack } from "@/lib/content";
+import { aboutParagraphs, principles, stack } from "@/lib/content";
 import type { GithubStats } from "@/lib/github-stats";
 
-const paragraphs = [
-  "I'm a student at North East High School, and I spend my afternoons in the software development program at Erie County Technical School. Most of what I know comes from building software for real classrooms and school workflows. That started with small scripts and turned into full applications with authentication, databases, audit trails, and deployments.",
-  "Most of my work is TypeScript across the stack: Next.js and React on the front, Node or Fastify behind it, and a database that has to survive real users. When a problem is performance-bound or needs a lower-level model, I reach for Rust — the engine work is where I learn rendering, memory layout, and measurement the hard way.",
-  "I care about the parts that are easy to skip: role checks enforced on the server, timezones, migrations, error states, and whether the thing still works on a phone in a hallway. I would rather ship a smaller system that holds up than a demo that does not.",
-];
+const paragraphs = aboutParagraphs;
 
 export function About({ stats }: { stats: GithubStats | null }) {
   return (

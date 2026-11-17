@@ -248,3 +248,51 @@
     transform: scaleX(0);
   }
 }
+
+/* Print theme: a light, paper-friendly version of any portfolio page. */
+@media print {
+  html.dark {
+    --background: #ffffff;
+    --foreground: #171717;
+    --card: #ffffff;
+    --card-foreground: #171717;
+    --muted: #f4f4f5;
+    --muted-foreground: #404040;
+    --border: #d4d4d8;
+    --brand: #0f5f6b;
+    --brand-foreground: #ffffff;
+    --ring: #0f5f6b;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+  }
+
+  @page {
+    margin: 14mm;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+
+  table {
+    break-inside: auto;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  .print-break-avoid {
+    break-inside: avoid;
+  }
+}

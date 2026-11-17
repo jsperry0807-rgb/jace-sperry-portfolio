@@ -35,6 +35,12 @@ export const site = {
   orgHandle: "JaSperryTech",
 } as const;
 
+export const portfolios = [
+  { href: "/", label: "Personal" },
+  { href: "/ects", label: "ECTS" },
+  { href: "/north-east", label: "North East" },
+] as const;
+
 export const nav = [
   { href: "/#work", label: "Work", id: "work" },
   { href: "/#about", label: "About", id: "about" },
