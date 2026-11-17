@@ -24,8 +24,12 @@ test("renders the portfolio and its core content", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Cinderfall", exact: true })).toHaveCount(0);
   await expect(page.getByRole("link", { name: /Website Upgrader/ })).toBeAttached();
 
-  await page.getByRole("heading", { name: "What the repos say" }).scrollIntoViewIfNeeded();
-  await expect(page.getByText("Contributions / last 12 months")).toBeVisible();
+  // The GitHub panel is optional when the API is rate-limited or unavailable.
+  const reposHeading = page.getByRole("heading", { name: "What the repos say" });
+  if ((await reposHeading.count()) > 0) {
+    await reposHeading.scrollIntoViewIfNeeded();
+    await expect(page.getByText("Contributions / last 12 months")).toBeVisible();
+  }
 
   await expect(
     page.getByRole("link", { name: "jsperry0807@gmail.com" }),

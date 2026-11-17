@@ -10,7 +10,13 @@ test("ECTS portfolio covers the graduation requirements", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Work Samples" })).toBeVisible();
   await expect(page.locator("#work-samples article")).toHaveCount(6);
   await expect(
-    page.getByRole("heading", { name: "CareerSafe Certifications" }),
+    page.getByRole("heading", { name: "CareerSafe & Future Ready PA" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Advanced Training Day" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Honor Roll Award" }),
   ).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Home School Reflection" }),

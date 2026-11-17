@@ -47,7 +47,7 @@ export const ectsChecklist: ChecklistItem[] = [
   },
   {
     id: "careersafe",
-    label: "CareerSafe 1–4",
+    label: "CareerSafe / Future Ready PA",
     status: "file",
     hint: "One certificate per level.",
   },
@@ -63,8 +63,8 @@ export const ectsChecklist: ChecklistItem[] = [
   },
   {
     id: "reflections",
-    label: "ATD / field trip reflections (2)",
-    status: "draft",
+    label: "ATD / field trip reflections (4)",
+    status: "ready",
   },
   {
     id: "growth",
@@ -95,6 +95,9 @@ export const ectsFacts = [
   { label: "Home school", value: "North East High School" },
   { label: "Portfolio", value: "2026" },
 ] as const;
+
+export const personalStory =
+  "I started programming in 2018, when I found Replit and began teaching myself with small projects. I built my first website at 14 without help, and kept going from there. When I am not coding, I am usually reading about research topics or mountain biking — that balance is part of how I stay steady.";
 
 export const coverLetter = {
   date: "[Date]",
@@ -225,6 +228,11 @@ export const recommendations = [
 
 export const activities = [
   {
+    title: "Honor Roll Award",
+    kind: "Award",
+    detail: "Quarter 1, 2024–2025. Recognized for academic performance at ECTS.",
+  },
+  {
     title: "CyberPatriot",
     kind: "Competition",
     detail:
@@ -262,28 +270,47 @@ export const postSecondaryPlan = {
 
 export const reflections = [
   {
-    title: "ATD Reflection",
-    status: "draft" as const,
+    title: "Advanced Training Day",
+    date: "September 25, 2024",
+    status: "ready" as const,
     paragraphs: [
-      "The ATD gave me a structured look at the skills I use in the software development program. My strongest areas were [strength] and [strength]; the results confirmed that I am comfortable breaking a problem into parts and working through it until the pieces fit.",
-      "The area I want to improve is [area]. One concrete example is [example]. My plan is to [action].",
+      "On September 25, I attended Advanced Training Day at ECTS. The event brought in college, military, and industry representatives, and we could ask each of them direct questions about what comes after high school.",
+      "I learned that joining the Air Force requires at least a four-year commitment and an ASVAB score, and that Penn State's tuition and fees were around $20,066 at the time. Penn State offers computer science but not a separate computer programming major. The day gave me a clearer picture of the different paths available and what each one actually requires.",
     ],
-    note: "Replace the brackets with your actual ATD results and one specific example.",
   },
   {
-    title: "Field Trip Reflection",
-    status: "draft" as const,
+    title: "Penn State Behrend Report",
+    date: "November 21, 2025",
+    status: "ready" as const,
     paragraphs: [
-      "On the [site] visit, I expected [expectation]. What stood out was [observation].",
-      "The visit connected the work we do in labs to a real workplace: [connection]. It made me think differently about [change].",
+      "Our class visited Penn State Behrend. We started in the planetarium with a video about the Artemis missions, then toured the campus and several engineering labs, including the plastics lab, gaming lab, and game design lab.",
+      "Most of the day focused on campus resources rather than programming, but seeing the labs and hearing how the programs are structured gave me a better sense of what a four-year engineering school looks like. It also helped me compare the hands-on work I do at ECTS with a university program.",
     ],
-    note: "Replace the brackets with the site you visited and what you actually saw.",
+  },
+  {
+    title: "Erie Insurance Field Trip",
+    date: "April 29, 2025",
+    status: "ready" as const,
+    paragraphs: [
+      "Our class visited Erie Insurance for a campus tour and a series of talks from people across the company, including information security, business support, operations, cloud, and apprenticeship roles. The afternoon included a requirements-gathering and agility activity.",
+      "The visit helped me see how much of the work there is networking and systems administration, while the programming work sits closer to software development. It confirmed that web development is the part of technology I want to keep pursuing.",
+    ],
+  },
+  {
+    title: "Guest Speaker: Dan Tupitza",
+    date: "May 12, 2025",
+    status: "ready" as const,
+    paragraphs: [
+      "Mr. Dan Tupitza, Senior Vice President of Platform Engineering at M&T Bank, spoke to our class. The line that stayed with me was: “Don’t let perfection get in the way of a good product.”",
+      "He also encouraged us to put everything on GitHub, no matter how small, and to stay adaptable. He said full-stack developers are in demand because technology roles change quickly, and he recommended reaching out directly to employers to stand out from a stack of resumes. I have tried to apply those habits to my own work.",
+    ],
   },
 ] as const;
 
 export const growthReflection = {
   paragraphs: [
     "When I started at ECTS, I could write small scripts and follow tutorials. I did not know how much work lived between a working demo and a program someone else could use.",
+    "My first five weeks at ECTS were slower than I expected. I started with block coding in Minecraft Education, moved into Python flow control, functions, and lists, and then began learning React on my own. I also started a CMS project for the school, which was my first look at turning a class exercise into something other people could use.",
     "The first big shift was learning to finish. Snack Cart and Offense Tracker forced me to deal with authentication, role checks, timezones, empty states, and deployment — the parts that are easy to skip when you are only showing a project to a teacher. Building ECTS Housing with a team added review workflows, file storage, and the reality of other people using what I made.",
     "The second shift was learning to measure. The voxel engine work at Valescent Group is the clearest example: a milestone does not start until the previous one has a number attached to it. That habit has changed how I approach web performance and how I decide when a feature is actually done.",
     "I still have a lot to learn. But I am leaving ECTS with a process I trust: scope the smallest real version, build it end to end, measure it, and write down what I would do differently.",
@@ -323,6 +350,7 @@ export const homeSchool = {
     "North East High School has been the steady half of a split schedule. I spend my mornings at North East and my afternoons in the software development program at Erie County Technical School, and I have worked a job through most of that time. Learning to move between those three worlds — school, technical program, and work — has been its own education in planning and follow-through.",
     "North East gave me the fundamentals I use every day in software: clear writing, careful reading, and the habit of asking a question when something does not make sense. The classroom expectation was not just to get the answer but to explain it, which is the same skill I use when I write a design note or walk someone through a bug.",
     "The community side matters too. Teachers and classmates knew when I was balancing a heavy week, and the school gave me room to take the ECTS program seriously. That support is part of why I have been able to keep shipping projects instead of treating them as a side hobby.",
+    "Outside of school and work, I am usually mountain biking or reading about research. That balance is part of how I keep going, and it is something I plan to carry into college.",
     "I am grateful for the time I have had at North East. It gave me a base, and ECTS gave me a direction. I plan to carry both into a computer science or software engineering program after graduation.",
   ],
 } as const;

@@ -86,7 +86,7 @@ export const recommendations = [
 ];
 ```
 
-The checklist statuses are also in `lib/ects.ts`: `"ready"`, `"draft"`, or `"file"`. Update them as the final PDFs are added. The ATD/field-trip reflections and post-secondary plan include bracketed prompts to personalize.
+The checklist statuses are also in `lib/ects.ts`: `"ready"`, `"draft"`, or `"file"`. Update them as the final PDFs are added. The cover letter and post-secondary plan still contain bracketed fields to personalize. The Advanced Training Day, Penn State Behrend, Erie Insurance, and guest-speaker reflections were adapted from the previous ECTS portfolio at `ects-cmp.com/students/JaSperry/portfolio/`, along with the 2024–2025 Honor Roll award.
 
 ## Editing content
 

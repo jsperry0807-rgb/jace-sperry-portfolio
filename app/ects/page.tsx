@@ -20,6 +20,7 @@ import {
   growthReflection,
   homeSchool,
   opportunities,
+  personalStory,
   postSecondaryPlan,
   recommendations,
   reflections,
@@ -183,6 +184,7 @@ export default function EctsPortfolioPage() {
               {aboutParagraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 32)}>{paragraph}</p>
               ))}
+              <p>{personalStory}</p>
               <p>
                 This portfolio is the collection of that work: the documents, samples,
                 credentials, and reflections required by the ECTS program. The sections
@@ -371,6 +373,14 @@ export default function EctsPortfolioPage() {
                     />
                   </ResumeGroup>
                 ) : null}
+
+                <ResumeGroup title="Honors">
+                  <ResumeItem
+                    title="Honor Roll Award"
+                    meta="2024–2025"
+                    detail="Quarter 1"
+                  />
+                </ResumeGroup>
               </div>
             </div>
 
@@ -531,9 +541,9 @@ export default function EctsPortfolioPage() {
         <PortfolioSection
           id="careersafe"
           index="08"
-          title="CareerSafe Certifications"
+          title="CareerSafe & Future Ready PA"
           status="file"
-          description="One certificate for each level. Update the selected topic to match the certificate you completed."
+          description="Future Ready PA uses the four CareerSafe certificates. One for each level; update the selected topic to match the certificate you completed."
         >
           <div className="grid gap-4 sm:grid-cols-2">
             {careerSafe.map((item) => (
@@ -586,9 +596,9 @@ export default function EctsPortfolioPage() {
               <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground/85">
                 To add
               </p>
-              <h3 className="mt-2 text-base font-medium">Awards & honors</h3>
+              <h3 className="mt-2 text-base font-medium">Additional awards</h3>
               <p className="mt-2 text-[12.5px] leading-relaxed text-muted-foreground">
-                Add academic or technical awards, honor roll, or competition placement.
+                Add any other academic or technical awards or competition placement.
               </p>
             </div>
 
@@ -642,8 +652,8 @@ export default function EctsPortfolioPage() {
           id="reflections"
           index="11"
           title="ATD / Field Trip Reflections"
-          status="draft"
-          description="Two reflections from the ATD process or a field trip. Personalize the bracketed sections with your actual experience."
+          status="ready"
+          description="Four reflections from Advanced Training Day, field trips, and a guest speaker. These are adapted from the previous ECTS portfolio."
         >
           <div className="grid gap-4 lg:grid-cols-2">
             {reflections.map((reflection) => (
@@ -655,14 +665,14 @@ export default function EctsPortfolioPage() {
                   <h3 className="text-base font-medium">{reflection.title}</h3>
                   <StatusChip status={reflection.status} />
                 </div>
+                <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground/85">
+                  {reflection.date}
+                </p>
                 <div className="mt-3 space-y-3 text-[13px] leading-relaxed text-muted-foreground">
                   {reflection.paragraphs.map((paragraph) => (
                     <p key={paragraph.slice(0, 32)}>{paragraph}</p>
                   ))}
                 </div>
-                <p className="mt-4 border-t border-border/60 pt-3 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground/85 print:hidden">
-                  {reflection.note}
-                </p>
               </article>
             ))}
           </div>
