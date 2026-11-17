@@ -38,21 +38,21 @@ export type ContributionSnapshot = {
 };
 
 export const contributionSnapshot: ContributionSnapshot = {
-  "fetchedAt": "2026-11-16T18:55:52.236Z",
+  "fetchedAt": "2026-11-17T16:02:26.103Z",
   "login": "jsperry0807-rgb",
-  "contributions": 678,
-  "commits": 625,
+  "contributions": 694,
+  "commits": 641,
   "pullRequests": 30,
   "issues": 2,
   "reviews": 0,
   "privateContributions": 0,
   "repositories": 21,
   "activeDays": 72,
-  "totalDays": 366,
+  "totalDays": 367,
   "longestStreak": 7,
-  "activePercent": 19.672131147540984,
+  "activePercent": 19.618528610354225,
   "windowStart": "2025-11-16",
-  "windowEnd": "2026-11-16",
+  "windowEnd": "2026-11-17",
   "weeks": [
     {
       "firstDay": "2025-11-16",
@@ -2144,8 +2144,13 @@ export const contributionSnapshot: ContributionSnapshot = {
         },
         {
           "date": "2026-11-16",
-          "count": 3,
+          "count": 19,
           "weekday": 1
+        },
+        {
+          "date": "2026-11-17",
+          "count": 0,
+          "weekday": 2
         }
       ]
     }
@@ -2165,7 +2170,7 @@ export const contributionSnapshot: ContributionSnapshot = {
     },
     {
       "name": "Valescent/engine",
-      "commits": 23
+      "commits": 37
     },
     {
       "name": "jsperry0807-rgb/ShadowMesh",
@@ -2212,6 +2217,10 @@ export const contributionSnapshot: ContributionSnapshot = {
       "commits": 6
     },
     {
+      "name": "jsperry0807-rgb/jace-sperry-portfolio",
+      "commits": 4
+    },
+    {
       "name": "jsperry0807-rgb/fullStackTwemp",
       "commits": 3
     },
@@ -2221,10 +2230,6 @@ export const contributionSnapshot: ContributionSnapshot = {
     },
     {
       "name": "jsperry0807-rgb/slot-game",
-      "commits": 2
-    },
-    {
-      "name": "jsperry0807-rgb/jace-sperry-portfolio",
       "commits": 2
     },
     {
