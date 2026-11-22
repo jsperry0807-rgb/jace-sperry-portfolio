@@ -38,62 +38,22 @@ export type ContributionSnapshot = {
 };
 
 export const contributionSnapshot: ContributionSnapshot = {
-  "fetchedAt": "2026-11-21T14:41:03.438Z",
+  "fetchedAt": "2026-11-22T14:37:07.679Z",
   "login": "jsperry0807-rgb",
-  "contributions": 732,
-  "commits": 679,
-  "pullRequests": 30,
-  "issues": 2,
+  "contributions": 855,
+  "commits": 799,
+  "pullRequests": 32,
+  "issues": 3,
   "reviews": 0,
   "privateContributions": 0,
   "repositories": 21,
-  "activeDays": 73,
-  "totalDays": 371,
+  "activeDays": 77,
+  "totalDays": 365,
   "longestStreak": 7,
-  "activePercent": 19.67654986522911,
-  "windowStart": "2025-11-16",
-  "windowEnd": "2026-11-21",
+  "activePercent": 21.095890410958905,
+  "windowStart": "2025-11-23",
+  "windowEnd": "2026-11-22",
   "weeks": [
-    {
-      "firstDay": "2025-11-16",
-      "days": [
-        {
-          "date": "2025-11-16",
-          "count": 0,
-          "weekday": 0
-        },
-        {
-          "date": "2025-11-17",
-          "count": 0,
-          "weekday": 1
-        },
-        {
-          "date": "2025-11-18",
-          "count": 0,
-          "weekday": 2
-        },
-        {
-          "date": "2025-11-19",
-          "count": 0,
-          "weekday": 3
-        },
-        {
-          "date": "2025-11-20",
-          "count": 0,
-          "weekday": 4
-        },
-        {
-          "date": "2025-11-21",
-          "count": 0,
-          "weekday": 5
-        },
-        {
-          "date": "2025-11-22",
-          "count": 0,
-          "weekday": 6
-        }
-      ]
-    },
     {
       "firstDay": "2025-11-23",
       "days": [
@@ -2159,18 +2119,28 @@ export const contributionSnapshot: ContributionSnapshot = {
         },
         {
           "date": "2026-11-19",
-          "count": 0,
+          "count": 8,
           "weekday": 4
         },
         {
           "date": "2026-11-20",
-          "count": 0,
+          "count": 43,
           "weekday": 5
         },
         {
           "date": "2026-11-21",
-          "count": 0,
+          "count": 70,
           "weekday": 6
+        }
+      ]
+    },
+    {
+      "firstDay": "2026-11-22",
+      "days": [
+        {
+          "date": "2026-11-22",
+          "count": 2,
+          "weekday": 0
         }
       ]
     }
@@ -2181,12 +2151,12 @@ export const contributionSnapshot: ContributionSnapshot = {
       "commits": 248
     },
     {
-      "name": "jsperry0807-rgb/voxel-engine",
-      "commits": 171
+      "name": "Valescent/engine",
+      "commits": 192
     },
     {
-      "name": "Valescent/engine",
-      "commits": 72
+      "name": "jsperry0807-rgb/voxel-engine",
+      "commits": 171
     },
     {
       "name": "Dakotakuhn12/Hangman-Game",
@@ -2217,11 +2187,11 @@ export const contributionSnapshot: ContributionSnapshot = {
       "commits": 10
     },
     {
-      "name": "jsperry0807-rgb/offense-tracker",
+      "name": "jsperry0807-rgb/idea-incubator",
       "commits": 8
     },
     {
-      "name": "jsperry0807-rgb/idea-incubator",
+      "name": "jsperry0807-rgb/offense-tracker",
       "commits": 8
     },
     {
