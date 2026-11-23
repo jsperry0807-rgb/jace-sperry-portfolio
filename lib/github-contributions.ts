@@ -38,21 +38,21 @@ export type ContributionSnapshot = {
 };
 
 export const contributionSnapshot: ContributionSnapshot = {
-  "fetchedAt": "2026-11-22T14:37:07.679Z",
+  "fetchedAt": "2026-11-23T18:12:14.704Z",
   "login": "jsperry0807-rgb",
-  "contributions": 855,
-  "commits": 799,
+  "contributions": 866,
+  "commits": 810,
   "pullRequests": 32,
   "issues": 3,
   "reviews": 0,
   "privateContributions": 0,
   "repositories": 21,
   "activeDays": 77,
-  "totalDays": 365,
+  "totalDays": 366,
   "longestStreak": 7,
-  "activePercent": 21.095890410958905,
+  "activePercent": 21.03825136612022,
   "windowStart": "2025-11-23",
-  "windowEnd": "2026-11-22",
+  "windowEnd": "2026-11-23",
   "weeks": [
     {
       "firstDay": "2025-11-23",
@@ -2139,8 +2139,13 @@ export const contributionSnapshot: ContributionSnapshot = {
       "days": [
         {
           "date": "2026-11-22",
-          "count": 2,
+          "count": 13,
           "weekday": 0
+        },
+        {
+          "date": "2026-11-23",
+          "count": 0,
+          "weekday": 1
         }
       ]
     }
@@ -2152,7 +2157,7 @@ export const contributionSnapshot: ContributionSnapshot = {
     },
     {
       "name": "Valescent/engine",
-      "commits": 192
+      "commits": 203
     },
     {
       "name": "jsperry0807-rgb/voxel-engine",
