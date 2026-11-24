@@ -38,7 +38,7 @@ export type ContributionSnapshot = {
 };
 
 export const contributionSnapshot: ContributionSnapshot = {
-  "fetchedAt": "2026-11-23T18:12:14.704Z",
+  "fetchedAt": "2026-11-24T17:47:38.334Z",
   "login": "jsperry0807-rgb",
   "contributions": 866,
   "commits": 810,
@@ -48,11 +48,11 @@ export const contributionSnapshot: ContributionSnapshot = {
   "privateContributions": 0,
   "repositories": 21,
   "activeDays": 77,
-  "totalDays": 366,
+  "totalDays": 367,
   "longestStreak": 7,
-  "activePercent": 21.03825136612022,
+  "activePercent": 20.98092643051771,
   "windowStart": "2025-11-23",
-  "windowEnd": "2026-11-23",
+  "windowEnd": "2026-11-24",
   "weeks": [
     {
       "firstDay": "2025-11-23",
@@ -2146,6 +2146,11 @@ export const contributionSnapshot: ContributionSnapshot = {
           "date": "2026-11-23",
           "count": 0,
           "weekday": 1
+        },
+        {
+          "date": "2026-11-24",
+          "count": 0,
+          "weekday": 2
         }
       ]
     }
